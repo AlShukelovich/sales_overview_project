@@ -28,6 +28,19 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CELERY_BROKER_URL = 'sqla+sqlite:///db.sqlite'
+CELERY_RESULT_BACKEND = 'db+sqlite:///results.sqlite'
+#for redis
+# CELERY_BROKER_URL = "redis://localhost:6379"
+# CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+
+CELERY_BEAT_SCHEDULE = {
+   'create_sales': {
+        'task': 'sale.tasks.create_file_json',
+        'schedule': 5
+    },
+}
 
 # Application definition
 
